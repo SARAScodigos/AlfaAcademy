@@ -1,0 +1,109 @@
+html, body {
+    height: 100%; /* Asegúrate de que el html y body ocupen el 100% del alto de la ventana */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1; /* Hace que el contenido principal ocupe el espacio restante */
+}
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+}
+
+.navbar-brand img {
+    max-width: 50px; /* Ancho máximo del logo */
+    max-height: 50px; /* Altura máxima del logo */
+    margin-right: 15px; /* Separación con el menú */
+}
+
+
+.nav-link.active {
+    font-weight: bold;
+    border:#f8f9fa81 solid 1px;
+    border-radius: 10px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+}
+
+
+.card-description {
+    font-weight: normal; /* Texto normal */
+    color: #333; /* Color del texto */
+    text-align: justify;
+    width: 95%;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.text-decoration-none:hover {
+    text-decoration: none;
+}
+
+
+footer {
+    width: 100%; /* Asegura que el footer ocupe todo el ancho */
+    background-color: #212529; /* Color oscuro */
+    color: white; /* Texto en blanco */
+    text-align: center; /* Centrar el texto */
+    padding: 1rem; /* Espaciado interno */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para darle estilo */
+    position: relative; /* Relativo a la página */
+}
+
+.btn-primary {
+    background: #212529 !important;
+    border:none !important;
+}
+
+@media (max-width: 770px) {
+    .container {
+        flex-direction: column; /* Cambiar dirección a columna */
+        align-items: center;
+    }
+    .navbar-brand {
+        margin-bottom: 10px; /* Espaciado entre logo y menú */
+    }
+    nav.nav {
+        text-align: center; /* Centrar los enlaces del menú */
+    }
+    .card-description{
+        font-size: 14px;
+    }
+}

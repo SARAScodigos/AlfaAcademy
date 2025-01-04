@@ -1,0 +1,4 @@
+.env
+backend/google-config.js
+backend/test-token.js
+node_modules/
