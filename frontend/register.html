@@ -29,8 +29,31 @@
         </form>
         <div id="responseMessage" class="mt-3"></div>
     </div>
-    <script src="script.js">
-        
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const data = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                role: document.getElementById('role').value
+            };
+
+            fetch('https://e0e3-200-37-205-82.ngrok-free.app/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(result => {
+                const responseMessage = document.getElementById('responseMessage');
+                responseMessage.textContent = result.message;
+                responseMessage.className = result.message.includes('éxito') ? 'text-success' : 'text-danger';
+            })
+            .catch(error => console.error('Error:', error));
+        });
     </script>
 </body>
 </html>

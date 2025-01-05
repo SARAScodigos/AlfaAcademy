@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Acceso Administrativo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -88,8 +88,32 @@
         </form>
         <p id="error" class="error-message"></p>
     </main>
-    <script src="script.js">
-        
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const role = document.getElementById('role').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, role }),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Credenciales incorrectas');
+                    }
+                    return response.json();
+                })
+                .then(({ role }) => {
+                    window.location.href = role === 'admin' ? 'admin.html' : 'index.html';
+                })
+                .catch(error => {
+                    document.getElementById('error').textContent = error.message;
+                });
+        });
     </script>
 </body>
 </html>
