@@ -1,0 +1,147 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+    text-align: left;
+}
+
+select, input, button {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #212529;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #31373d;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Contenedor flotante */
+#students-container {
+    position: fixed;
+    top: 20px; /* Distancia desde el fondo */
+    left: 20px; /* Distancia desde el borde derecho */
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+}
+
+/* Caja redondeada */
+#students-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    /* Borde verde */
+    border-radius: 25px; /* Redondeado */
+    padding: 10px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza animación */
+}
+
+/* Efecto hover */
+#students-box:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
+}
+
+/* Círculo verde */
+#green-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #28a745; /* Verde */
+    border-radius: 50%; /* Hace que sea un círculo */
+    margin-right: 10px; /* Espaciado entre el círculo y el texto */
+}
+
+/* Texto */
+#students-text {
+    color: #333;
+}
+
+#students-container{
+    width: 220px;
+    margin-bottom: 20px;
+}
+/* Caja redondeada */
+#students-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    /* Borde verde */
+    border-radius: 25px; /* Redondeado */
+    padding: 10px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza animación */
+}
+
+/* Efecto hover */
+#students-box:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
+}
+
+/* Círculo verde */
+#green-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #28a745; /* Verde */
+    border-radius: 50%; /* Hace que sea un círculo */
+    margin-right: 10px; /* Espaciado entre el círculo y el texto */
+}
+
+/* Texto */
+#students-text {
+    color: #333;
+}

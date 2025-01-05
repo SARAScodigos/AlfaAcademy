@@ -14,6 +14,10 @@ header {
 header h1 {
     font-size: 2.5rem;
 }
+.logo{
+    border-radius: 10px;
+
+}
 
 .navbar-brand img {
     max-width: 50px; /* Ancho máximo del logo */
@@ -91,6 +95,87 @@ footer {
     background: #212529 !important;
     border:none !important;
 }
+
+#students-container{
+    width: 220px;
+    margin-bottom: 20px;
+}
+/* Caja redondeada */
+#students-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    /* Borde verde */
+    border-radius: 25px; /* Redondeado */
+    padding: 10px 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza animación */
+}
+
+/* Efecto hover */
+#students-box:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
+}
+
+/* Círculo verde */
+#green-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #28a745; /* Verde */
+    border-radius: 50%; /* Hace que sea un círculo */
+    margin-right: 10px; /* Espaciado entre el círculo y el texto */
+}
+
+/* Texto */
+#students-text {
+    color: #333;
+}
+
+
+/* Estilo del contenedor */
+.motivational-container {
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 15px; /* Esquinas redondeadas */
+    background-color: #f9f9f9; /* Fondo claro */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    font-family: Arial, sans-serif; /* Fuente */
+    width: 80%; /* Anchura del contenedor */
+    max-width: 600px; /* Máxima anchura */
+}
+
+/* Estilo del texto motivacional */
+.motivational-text {
+    font-size: 1.5rem; /* Tamaño grande */
+    font-weight: bold; /* Texto en negrita */
+    color: #212529; /* Color del texto */
+    margin-bottom: 10px; /* Espaciado con el botón */
+}
+
+/* Estilo del botón */
+.motivational-button {
+    display: inline-block;
+    text-decoration: none; /* Sin subrayado */
+    font-size: 1rem; /* Tamaño de texto */
+    color: white; /* Texto blanco */
+    background-color: #212529; /* Fondo verde */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para el botón */
+.motivational-button:hover {
+    background-color: #212529e5; /* Verde más oscuro */
+}
+
 
 @media (max-width: 770px) {
     .container {
