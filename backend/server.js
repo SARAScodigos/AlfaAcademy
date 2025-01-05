@@ -2,7 +2,7 @@ require('dotenv').config(); // Para cargar las variables de entorno
 const express = require('express');
 const multer = require('multer');
 const { Readable } = require('stream');
-const sqlite3 = require('sqlite3').verbose();
+const { Pool } = require('pg');
 const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
@@ -11,6 +11,18 @@ const authRoutes = require('./routes/auth'); // Importa las rutas de autenticaci
 
 const app = express();
 const PORT = 3000;
+
+// Configuración de PostgreSQL
+const pool = new Pool({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false, // Esto desactiva la validación del certificado SSL
+    },
+});
 
 // Configuración de CORS
 app.use(cors({
@@ -21,7 +33,6 @@ app.use(cors({
 // Middleware global
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Configurar cliente OAuth2 de Google
 const oauth2Client = new google.auth.OAuth2(
@@ -37,13 +48,6 @@ oauth2Client.setCredentials({
 // Crear servicio de Google Drive
 const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
-
-// Middleware global
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-
-
 // Configuración de sesiones
 app.use(session({
     secret: 'clave-secreta', // Cambia esto por una clave segura en producción
@@ -54,111 +58,73 @@ app.use(session({
 
 // Middleware para proteger rutas
 function ensureAuthenticated(req, res, next) {
-    console.log("Verificando autenticación...");
-    console.log("Sesión actual:", req.session);
-
     if (req.session && req.session.user) {
-        console.log("Usuario autenticado:", req.session.user);
         return next();
     }
-    console.log("No autenticado. Redirigiendo a /login.html");
     res.redirect('/login.html');
 }
 
-// Middleware para proteger rutas según autenticación y roles
+// Middleware para proteger rutas según rol
 function ensureRole(role) {
     return (req, res, next) => {
-        console.log("Verificando autenticación y rol...");
-        console.log("Sesión actual:", req.session);
-
-        if (!req.session || !req.session.user) {
-            console.log("No autenticado. Redirigiendo a /login.html");
-            return res.redirect('/login.html');
-        }
-
-        const user = req.session.user;
-
-        if (user.role !== role) {
-            console.log(`Acceso denegado. Se requiere el rol: ${role}, pero el usuario tiene: ${user.role}`);
+        if (!req.session || !req.session.user || req.session.user.role !== role) {
             return res.status(403).send('Acceso denegado.');
         }
-
-        console.log(`Acceso permitido al rol: ${role}`);
         next();
     };
 }
 
-// Ruta inicial que redirige al login si no hay sesión
+// Crear tablas en PostgreSQL
+async function createTables() {
+    try {
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(50) NOT NULL UNIQUE,
+                password TEXT NOT NULL,
+                role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'student'))
+            );
+        `);
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS videos (
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
+                category TEXT NOT NULL,
+                path TEXT NOT NULL,
+                description TEXT
+            );
+        `);
+        console.log('Tablas creadas/verificadas.');
+    } catch (err) {
+        console.error('Error al crear tablas:', err);
+    }
+}
+
+createTables();
+
+// Ruta inicial
 app.get('/', (req, res) => {
     if (req.session && req.session.user) {
         const { role } = req.session.user;
-        console.log("Usuario autenticado, redirigiendo según rol:", role);
         res.redirect(role === 'admin' ? '/admin.html' : '/index.html');
     } else {
-        console.log("Sin sesión, redirigiendo a login.html");
         res.redirect('/login.html');
     }
 });
 
 // Rutas protegidas
 app.get('/index.html', ensureAuthenticated, (req, res) => {
-    console.log("Accediendo a index.html");
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 app.get('/admin.html', ensureRole('admin'), (req, res) => {
-    console.log("Accediendo a admin.html");
     res.sendFile(path.join(__dirname, '../frontend/admin.html'));
-
 });
 
-app.get('/register.html', ensureRole('admin'), (req, res) => {
-    console.log("Accediendo a register.html");
-    res.sendFile(path.join(__dirname, '../frontend/register.html'));
-    
-});
 
 // Rutas de autenticación
 app.use('/auth', authRoutes);
-
-// Conexión a la base de datos
-const db = new sqlite3.Database('./database.sqlite', (err) => {
-    if (err) {
-        console.error('Error al conectar la base de datos:', err);
-    } else {
-        console.log('Base de datos conectada.');
-    }
-});
-
-// Crear las tablas requeridas
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        role TEXT NOT NULL CHECK(role IN ('admin', 'student'))
-    )`, (err) => {
-        if (err) {
-            console.error('Error al crear la tabla users:', err);
-        } else {
-            console.log('Tabla users creada/verificada.');
-        }
-    });
-
-    db.run(`CREATE TABLE IF NOT EXISTS videos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        category TEXT NOT NULL,
-        path TEXT NOT NULL,
-        description TEXT
-    )`, (err) => {
-        if (err) {
-            console.error('Error al crear la tabla videos:', err);
-        } else {
-            console.log('Tabla videos creada/verificada.');
-        }
-    });
-});
 
 // Configuración de almacenamiento de videos
 const storage = multer.memoryStorage();
@@ -166,31 +132,24 @@ const upload = multer({ storage });
 
 // Ruta para subir videos a Google Drive
 app.post('/upload', upload.single('video'), async (req, res) => {
-    console.log("Archivo recibido:", req.file);
-    console.log("Título:", req.body.title);
-    console.log("Categoría:", req.body.category);
-
     const { title, category, description } = req.body;
 
     try {
-        // Convertir el buffer del archivo a un flujo
         const bufferStream = new Readable();
         bufferStream.push(req.file.buffer);
-        bufferStream.push(null); // Indica el fin del flujo
+        bufferStream.push(null);
 
-        // Subir el archivo directamente a Google Drive
         const response = await drive.files.create({
             requestBody: {
                 name: req.file.originalname,
-                parents: [process.env.GOOGLE_FOLDER_ID], // ID de la carpeta en Google Drive
+                parents: [process.env.GOOGLE_FOLDER_ID],
             },
             media: {
                 mimeType: req.file.mimetype,
-                body: bufferStream, // Usar el flujo creado
+                body: bufferStream,
             },
         });
 
-        // Obtener el enlace público del archivo
         const fileId = response.data.id;
         await drive.permissions.create({
             fileId,
@@ -201,39 +160,35 @@ app.post('/upload', upload.single('video'), async (req, res) => {
         });
         const fileLink = `https://drive.google.com/file/d/${fileId}/preview`;
 
-        // Guardar en la base de datos
-        db.run(
-            'INSERT INTO videos (title, category, path, description) VALUES (?, ?, ?, ?)',
-            [title, category, fileLink, description],
-            (err) => {
-                if (err) {
-                    console.error('Error al guardar video en la base de datos:', err);
-                    return res.status(500).send('Error al guardar video.');
-                }
-                res.status(200).send('Video subido con éxito.');
-            }
+        await pool.query(
+            'INSERT INTO videos (title, category, path, description) VALUES ($1, $2, $3, $4)',
+            [title, category, fileLink, description]
         );
+        res.status(200).send('Video subido con éxito.');
     } catch (err) {
-        console.error('Error al subir el video a Google Drive:', err.message);
+        console.error('Error al subir el video:', err.message);
         res.status(500).send('Error al subir el video.');
     }
 });
 
-
-app.use(express.static(path.join(__dirname, '../frontend')));
-
 // Ruta para obtener videos por categoría
-app.get('/videos/:category', (req, res) => {
+app.get('/videos/:category', async (req, res) => {
     const category = req.params.category;
 
-    db.all('SELECT * FROM videos WHERE category = ?', [category], (err, rows) => {
-        if (err) {
-            console.error('Error al obtener videos:', err);
-            return res.status(500).send('Error al obtener videos.');
-        }
-        res.json(rows);
-    });
+    try {
+        const result = await pool.query(
+            'SELECT * FROM videos WHERE category = $1',
+            [category]
+        );
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error al obtener videos:', err);
+        res.status(500).send('Error al obtener videos.');
+    }
 });
+
+// Rutas estáticas
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Ruta de fallback
 app.use((req, res) => {
