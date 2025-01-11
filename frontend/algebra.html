@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Álgebra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,11 +23,9 @@
              <div>
                 <nav class="nav">
                     <a class="nav-link text-white" href="index.html">Inicio</a>
-                    <a class="nav-link text-white active" href="algebra.html">Álgebra</a>
-                    <a class="nav-link text-white" href="aritmetica.html">Aritmética</a>
-                    <a class="nav-link text-white" href="calculo.html">Cálculo</a>
-                    <a class="nav-link text-white" href="razonamiento.html">Razonamiento</a>
-                    <a class="nav-link text-white" href="literatura.html">Literatura</a>
+                    <a class="nav-link text-white active" href="algebra.html">Desarrollar Curso</a>
+                    <a class="nav-link text-white" href="aritmetica.html">Simulacros</a>
+                    
                 </nav>
                 
 
@@ -39,61 +38,328 @@
     <div id="students-container">
         <div id="students-box">
           <span id="green-circle"></span>
-          <span id="students-text">Estudiantes Activos: <span id="students-number">45</span></span>
+          <span id="students-text">Estudiantes Activos: <span id="students-number">...</span></span>
         </div>
     </div>
     <div class="motivational-container">
-        <p class="motivational-text">"Las vacas dicen 'muu', los gatos dicen 'miau', y las perras como voz dicen: ¡estudiaré mañana!"</p>
+        <p class="motivational-text">"La educación es el arma más poderosa para cambiar el mundo." – Nelson Mandela</p>
         <a href="https://drive.google.com/drive/folders/1tLs0sX8nQDMKEf59U_lRBNrg_kV3LnrS?usp=sharing" class="motivational-button">
             Ir a la práctica
         </a>
     </div>
     <main class="container">
-        <section id="videos">
-            <h2 class="text-center mb-4">Sección: Álgebra</h2>
-            <div id="videoGrid" class="row gy-4">
-                <!-- Videos se cargan aquí dinámicamente -->
+        <div>
+            <div class="toggle-header" data-toggle="semana-1" ><span class="icon"></span> Semana 1</div>
+            <div class="toggle-content" id="semana-1">
+                <div class="toggle-header" data-toggle="sesion-1" ><span class="icon"></span> Sesión 1</div>
+                <div class="toggle-content" id="sesion-1">
+                    <div class="container">
+                        <h2 class="sesion-title">Leyes de Signos, Potenciación y Fracciones</h2>
+                        <div class="video-section">
+                            <!-- Video y botones -->
+                            <div class="video-container">
+                                <div id="sesion1"></div>
+                                
+                                <div class="material-buttons">
+                                    
+                                    <a href="https://example.com/material.pdf" class="btn btn-primary">
+                                        <i class="fas fa-download"></i>Material de la Sesión
+                                    </a>
+                                    <a href="https://example.com/material.pdf" class="btn btn-secondary">
+                                        <i class="fas fa-download"></i>Guía de ejercicios resueltos
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                
+                            <!-- Formulario -->
+                            <div class="form-container">
+                                <h3>Conocimientos clave</h3>
+                                <form class="quiz-form" data-id="1">
+                                    <!-- Pregunta 1 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">1. ¿Cuál es el resultado de (-5) × (-4)?</label>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1a-1" value="20">
+                                            <label for="q1a-1">20</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1b-1" value="-20">
+                                            <label for="q1b-1">-20</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1c-1" value="-9">
+                                            <label for="q1c-1">-9</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1d-1" value="9">
+                                            <label for="q1d-1">9</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 2 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">2. ¿Cuál es la propiedad de a<sup>3</sup> × a<sup>2</sup>?</label>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2a-1" value="Multiplicación">
+                                            <label for="q2a-1">Multiplicación</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2b-1" value="Suma de exponentes">
+                                            <label for="q2b-1">Suma de exponentes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2c-1" value="Resta de exponentes">
+                                            <label for="q2c-1">Resta de exponentes</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2d-1" value="Potencia de un exponente">
+                                            <label for="q2d-1">Potencia de un exponente</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 3 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">3. Simplifica 2/4:</label>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3a-1" value="1/2">
+                                            <label for="q3a-1">1/2</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3b-1" value="2/4">
+                                            <label for="q3b-1">2/4</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3c-1" value="1/4">
+                                            <label for="q3c-1">1/4</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3d-1" value="1">
+                                            <label for="q3d-1">1</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Feedback -->
+                                    <p class="feedback"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-header" data-toggle="sesion-2"><span class="icon"></span> Sesión 2</div>
+                <div class="toggle-content" id="sesion-2">
+                    <div class="container">
+                        <h2 class="sesion-title">Ecuaciones y sistemas de Ecuaciones</h2>
+                        <div class="video-section">
+                            <!-- Video y botones -->
+                            <div class="video-container">
+                                <div id="sesion2"></div>
+                                
+                                <div class="material-buttons">
+                                    
+                                    <a href="https://example.com/material.pdf" class="btn btn-primary">
+                                        <i class="fas fa-download"></i>Material de la sesión
+                                    </a>
+                                    <a href="https://example.com/material.pdf" class="btn btn-secondary">
+                                        <i class="fas fa-download"></i>Guía de ejercicios resueltos
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                
+                            <!-- Formulario -->
+                            <div class="form-container">
+                                <h3>Conocimientos clave</h3>
+                                <form class="quiz-form" data-id="2">
+                                    <!-- Pregunta 1 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">1. Si 3x + 5 = 20, ¿cuál es el valor de x?</label>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1a-2" value="5">
+                                            <label for="q1a-2">5</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1b-2" value="3">
+                                            <label for="q1b-2">3</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1c-2" value="7">
+                                            <label for="q1c-2">7</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1d-2" value="15">
+                                            <label for="q1d-2">15</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 2 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">2. Un número más su doble es igual a 36. ¿Cuál es ese número?</label>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2a-2" value="12">
+                                            <label for="q2a-2">12</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2b-2" value="24">
+                                            <label for="q2b-2">24</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2c-2" value="18">
+                                            <label for="q2c-2">18</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2d-2" value="9">
+                                            <label for="q2d-2">9</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 3 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">3. Si 4x - 3 = 21, ¿cuál es el valor de x?</label>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3a-2" value="6">
+                                            <label for="q3a-2">6</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3b-2" value="4.5">
+                                            <label for="q3b-2">4.5</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3c-2" value="8">
+                                            <label for="q3c-2">8</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3d-2" value="5">
+                                            <label for="q3d-2">5</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Feedback -->
+                                    <p class="feedback"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-header" data-toggle="sesion-3"><span class="icon"></span> Sesión 3</div>
+                <div class="toggle-content" id="sesion-3">
+                    <div class="container">
+                        <h2 class="sesion-title">Porcentajes, Aumentos y Descuentos Sucesivos</h2>
+                        <div class="video-section">
+                            
+                            <!-- Video y botones -->
+                            <div class="video-container">
+                                <div id="sesion3" ></div>
+                                <div class="material-buttons">
+                                    
+                                    <a href="https://example.com/material.pdf" class="btn btn-primary">
+                                        <i class="fas fa-download"></i>Material de la sesión
+                                    </a>
+                                    <a href="https://example.com/material.pdf" class="btn btn-secondary">
+                                        <i class="fas fa-download"></i>Guía de ejercicios resueltos
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                
+                            <!-- Formulario -->
+                            <div class="form-container">
+                                <h3>Conocimientos clave</h3>
+                                <form class="quiz-form" data-id="3">
+                                    <!-- Pregunta 1 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">1. Un artículo cuesta $100. Si se le aplica un aumento del 20% y luego un descuento del 20%, ¿cuál es el precio final?</label>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1a-3" value="100">
+                                            <label for="q1a-3">$100</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1b-3" value="96">
+                                            <label for="q1b-3">$96</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1c-3" value="120">
+                                            <label for="q1c-3">$120</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q1" id="q1d-3" value="80">
+                                            <label for="q1d-3">$80</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 2 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">2. El precio de un televisor es $500. Si se aplica un descuento del 30% seguido de un descuento adicional del 20%, ¿cuál es el precio final?</label>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2a-3" value="200">
+                                            <label for="q2a-3">$200</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2b-3" value="350">
+                                            <label for="q2b-3">$350</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2c-3" value="280">
+                                            <label for="q2c-3">$280</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q2" id="q2d-3" value="250">
+                                            <label for="q2d-3">$250</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Pregunta 3 -->
+                                    <div class="mb-3">
+                                        <label class="form-label">3. Un salario de $1,000 aumenta un 10% en el primer año y un 10% en el segundo año. ¿Cuál es el salario después de los dos años?</label>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3a-3" value="1200">
+                                            <label for="q3a-3">$1,200</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3b-3" value="1210">
+                                            <label for="q3b-3">$1,210</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3c-3" value="1100">
+                                            <label for="q3c-3">$1,100</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="q3" id="q3d-3" value="1110">
+                                            <label for="q3d-3">$1,110</label>
+                                        </div>
+                                    </div>
+                            
+                                    <!-- Feedback -->
+                                    <p class="feedback"></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+    
+            <div class="toggle-header" data-toggle="semana-2"> <span class="icon"></span>Semana 2 <i class="fas fa-lock" style="margin-left: 5px;"></i></div>
+            <div class="toggle-content" id="semana-2">
+                <div class="toggle-header" data-toggle="sesion-4"><span class="icon"></span>Sesión 4 <i class="fas fa-lock" style="margin-left: 5px;"></i></div>
+                <div class="toggle-content" id="sesion-4">
+                    <div class="container">
+                        <h2 class="sesion-title">No tan rápido, aún hay mucho que aprender de la sesión anterior</h2>
+                    </div>
+                    <div class="video-section"><img src="images/block.png" alt="" style="height: 200px; width: 230px; margin: auto;"></div>
+                    
+                </div>
+            </div>
+            <div class="toggle-header" data-toggle="semana-3"> <span class="icon"></span>Semana 3 <i class="fas fa-lock" style="margin-left: 5px;"></i></div>
+            <div class="toggle-header" data-toggle="semana-3"> <span class="icon"></span>Semana 4 <i class="fas fa-lock" style="margin-left: 5px;"></i></div>
+            
+        </div>
     </main>
     <footer class="bg-dark text-white text-center py-3">
         <p class="mb-0">&copy; 2024 Plataforma de Clases</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const videoGrid = document.getElementById('videoGrid');
-
-            // Cargar videos de la categoría "calculo"
-            fetch('/videos/algebra') // Llama a la ruta del backend para "calculo"
-                .then(response => response.json())
-                .then(videos => {
-                    videos.forEach(video => {
-                        const videoElement = document.createElement('div');
-                        videoElement.classList.add('col-md-6', 'col-lg-4');
-                        videoElement.innerHTML = `
-                            <div class="card">
-                                <iframe 
-                                    src="${video.path}"  
-                                    frameborder="0"
-                                    width="100%" 
-                                    height="100%"
-                                    allow="autoplay; fullscreen" 
-                                    allowfullscreen>
-                                </iframe>
-                                <div class="card-body">
-                                    <h5 class="card-title">${video.title}</h5>
-                                    <p class="card-description">${video.description}</p> <!-- Mostrar descripción -->
-                                </div>
-                            </div>
-                        `;
-                        videoGrid.appendChild(videoElement);
-                        console.log(video.path);
-                    });
-                })
-                .catch(err => console.error('Error al cargar los videos:', err));
-                
-        });
-    </script>
+    <script src="script.js"></script>
+    <script src="structure.js"></script>
+    <script src="videos.js"></script>
 </body>
 </html>

@@ -14,11 +14,9 @@
             <h1 class="text-center">Administración de Videos</h1>
             <nav class="nav justify-content-center">
                 <a class="nav-link text-white" href="index.html">Inicio</a>
-                <a class="nav-link text-white" href="algebra.html">Álgebra</a>
-                <a class="nav-link text-white" href="aritmetica.html">Aritmética</a>
-                <a class="nav-link text-white" href="calculo.html">Cálculo</a>
-                <a class="nav-link text-white" href="razonamiento.html">Razonamiento</a>
-                <a class="nav-link text-white" href="literatura.html">Literatura</a>
+                <a class="nav-link text-white" href="algebra.html">Desarrollo del Curso</a>
+                <a class="nav-link text-white" href="aritmetica.html">Simulacros</a>
+                
             </nav>
         </div>
     </header>
@@ -39,11 +37,20 @@
                 <div class="mb-3">
                     <label for="videoCategory" class="form-label">Categoría</label>
                     <select id="videoCategory" name="category" class="form-select" required>
-                        <option value="algebra">Álgebra</option>
-                        <option value="aritmetica">Aritmética</option>
-                        <option value="calculo">Cálculo</option>
-                        <option value="razonamiento">Razonamiento</option>
-                        <option value="literatura">Literatura</option>
+                        <option value="sesion1">Primera Sesion</option>
+                        <option value="sesion2">Segunda Sesion</option>
+                        <option value="sesion3">Tercera Sesion</option>
+                        <option value="sesion4">Cuarta Sesion</option>
+                        <option value="sesion5">Quinta Sesion</option>
+                        <option value="sesion6">Sexta Sesion</option>
+                        <option value="sesion7">Septima Sesion</option>
+                        <option value="sesion8">Octava Sesion</option>
+                        <option value="sesion9">Novena Sesion</option>
+                        <option value="sesion10">Decima Sesion</option>
+                        <option value="sesion11">11 Sesion</option>
+                        <option value="sesion12">12 Sesion</option>
+                        <option value="sesion13">13 Sesion</option>
+                        <option value="sesion14">14 Sesion</option>
                     </select>
                 </div>
 
@@ -53,13 +60,20 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Subir Video</button>
             </form>
-        </section>
-        <section>
-            <h2 class="text-center mb-4">Lista de Videos por Categoría</h2>
-            <div id="videoGrid" class="row gy-4">
-                <!-- Videos cargados dinámicamente -->
+            <div class="progress" style="height: 20px; display: none;">
+                <div 
+                    id="uploadProgress" 
+                    class="progress-bar progress-bar-striped progress-bar-animated" 
+                    role="progressbar" 
+                    style="width: 0%;" 
+                    aria-valuenow="0" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100">
+                0%
+                </div>
             </div>
         </section>
+        
     </main>
     <footer class="bg-dark text-white text-center py-3">
         <p class="mb-0">&copy; 2024 Plataforma de Clases</p>
@@ -69,27 +83,45 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const uploadForm = document.getElementById('uploadForm');
-            const videoGrid = document.getElementById('videoGrid');
+            const progressBar = document.querySelector('.progress');
+            const progress = document.getElementById('uploadProgress');
 
-            // Cargar videos desde el backend
-            
-            // Manejar la subida del video
             uploadForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(uploadForm);
-                fetch('/upload', {
-                    method: 'POST',
-                    body: formData,
-                })
-                    .then(response => response.text())
-                    .then(result => {
-                        alert(result);
+
+                // Mostrar la barra de progreso
+                progressBar.style.display = 'block';
+
+                // Configurar la solicitud con XMLHttpRequest para mostrar el progreso
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/upload', true);
+
+                xhr.upload.addEventListener('progress', (e) => {
+                    if (e.lengthComputable) {
+                        const percentComplete = Math.round((e.loaded / e.total) * 100);
+                        progress.style.width = percentComplete + '%';
+                        progress.textContent = percentComplete + '%';
+                        progress.setAttribute('aria-valuenow', percentComplete);
+                    }
+                });
+
+                xhr.addEventListener('load', () => {
+                    if (xhr.status === 200) {
+                        alert('Video subido con éxito.');
                         location.reload(); // Recargar para mostrar los nuevos videos
-                    })
-                    .catch(err => {
-                        console.error('Error al subir el video:', err);
-                        alert('Error al subir el video');
-                    });
+                    } else {
+                        alert('Error al subir el video.');
+                    }
+                    progressBar.style.display = 'none'; // Ocultar barra al terminar
+                });
+
+                xhr.addEventListener('error', () => {
+                    alert('Error al subir el video.');
+                    progressBar.style.display = 'none'; // Ocultar barra en caso de error
+                });
+
+                xhr.send(formData);
             });
         });
     </script>

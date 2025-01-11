@@ -91,11 +91,103 @@ footer {
     position: relative; /* Relativo a la página */
 }
 
+.container h2{
+    text-align: center;
+    margin-left: -40px;
+}
+
+.video-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espaciado entre video y formulario */
+    margin-left: -40px;
+}
+
+.video-container {
+    flex: 3 1 70%; /* Video ocupa el 70% del espacio */
+    max-width: 900px; /* Ajusta el ancho máximo del video */
+    text-align: center;
+    
+}
+
+iframe {
+    width: 100% !important; /* Toma el ancho completo del contenedor */
+    height: 450px !important; /* Aumenta la altura del video */
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.form-container {
+    flex: 1 1 25%; /* Formulario ocupa el 25% del espacio */
+    max-width: 300px; /* Limita el ancho máximo del formulario */
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 0px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 12px !important;
+}
+.form-container h3{
+    text-align: center;
+    font-size: 22px;
+}
+
+.feedback {
+    font-weight: bold;
+    margin-top: 5px;
+}
+.feedback.correct {
+    color: rgb(26, 172, 26);
+}
+.feedback.incorrect {
+    color: rgb(204, 19, 19);
+}
+
+input[type="radio"]:checked + label {
+    background-color: rgb(233, 170, 10);
+    color: white;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    transform: scale(1.05);
+}
+label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-label{
+    background-color: #ffffff;
+    color: #0f0f0f;
+    box-shadow: 0 8px 15px rgba(66, 66, 66, 0.3);
+}
+
+
 .btn-primary {
     background: #212529 !important;
     border:none !important;
+    width: 30%;
+}
+.btn-primary:hover{
+    font-weight: bold;
 }
 
+.fas.fa-download {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
+    font-size: 1rem; /* Ajusta el tamaño del ícono */
+    color: rgb(233, 170, 10);
+}
+
+
+.btn-secondary{
+    width: 30%;
+}
+.btn-secondary:hover{
+    font-weight: bold;
+}
 #students-container{
     width: 220px;
     margin-bottom: 20px;
@@ -176,6 +268,49 @@ footer {
     background-color: #212529e5; /* Verde más oscuro */
 }
 
+.toggle-header {
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    color: white; /* Texto blanco */
+    background-color: #2c3e50; /* Fondo azul oscuro */
+    padding: 5px 10px;
+    margin: 5px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease;
+}
+
+.toggle-header:hover {
+    background-color: white;
+    font-style: italic;
+    color: #2c3e50; /* Azul más claro al pasar el cursor */
+}
+.toggle-content {
+    display: none;
+    margin-left: 20px;
+    
+}
+
+.icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border: solid 3px #aaaaaa;
+    border-width: 0 4px 4px 0;
+    transform: rotate(-45deg);
+    transition: transform 0.5s ease;
+}
+
+.icon.open {
+    transform: rotate(45deg);
+    border: solid 3px #aaaaaa; /* Rota el icono 90° más para simular apertura */
+}
+
 
 @media (max-width: 770px) {
     .container {
@@ -190,5 +325,35 @@ footer {
     }
     .card-description{
         font-size: 14px;
+    }
+    .video-section {
+        flex-direction: column;
+    }
+    iframe {
+        width: 100% !important; /* Toma el ancho completo del contenedor */
+        height: 100% !important; /* Aumenta la altura del video */
+        border: none !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .form-container {
+        margin-top: 20px;
+    }
+    .btn-primary{
+        width: auto;
+        margin: 10px 0px 10px 0px;
+    }
+    .fas.fa-download {
+        margin-right: 5px; /* Espacio entre el ícono y el texto */
+        font-size: 1rem; /* Ajusta el tamaño del ícono */
+    }
+    
+    .btn-secondary{
+        width: auto;
+    }
+    .descarga{
+        display: flex;
+        gap: 20px;
     }
 }

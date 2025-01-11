@@ -86,6 +86,21 @@ async function createTables() {
             );
         `);
 
+        // Crear tabla active_students
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS active_students (
+                id SERIAL PRIMARY KEY,
+                count INTEGER NOT NULL DEFAULT 30
+            );
+        `);
+
+        // Inserción inicial en active_students si no existe un registro
+        await pool.query(`
+            INSERT INTO active_students (count) 
+            SELECT 30 
+            WHERE NOT EXISTS (SELECT 1 FROM active_students WHERE id = 1);
+        `);
+
         await pool.query(`
             CREATE TABLE IF NOT EXISTS videos (
                 id SERIAL PRIMARY KEY,
@@ -94,6 +109,7 @@ async function createTables() {
                 path TEXT NOT NULL,
                 description TEXT
             );
+            
         `);
         console.log('Tablas creadas/verificadas.');
     } catch (err) {
@@ -186,6 +202,54 @@ app.get('/videos/:category', async (req, res) => {
         res.status(500).send('Error al obtener videos.');
     }
 });
+
+// Ruta para obtener el número actual de estudiantes activos
+app.get('/api/active-students', async (req, res) => {
+    try {
+        const { rows } = await pool.query('SELECT count FROM active_students WHERE id = 1');
+        res.json({ count: rows[0]?.count || 30 });
+    } catch (error) {
+        console.error('Error al obtener estudiantes activos:', error);
+        res.status(500).send('Error al obtener estudiantes activos');
+    }
+});
+
+async function updateActiveStudents() {
+    try {
+        const currentHour = new Date().getHours();
+        let min, max;
+
+        // Determina los rangos basados en la hora del día
+        if (currentHour >= 6 && currentHour < 12) { // Mañana
+            min = 30;
+            max = 50;
+        } else if (currentHour >= 12 && currentHour < 18) { // Tarde
+            min = 50;
+            max = 70;
+        } else { // Noche
+            min = 60;
+            max = 90;
+        }
+
+        // Obtiene el valor actual de la base de datos
+        const { rows } = await pool.query('SELECT count FROM active_students WHERE id = 1');
+        const currentCount = rows[0]?.count || min;
+
+        // Genera un nuevo valor cercano al actual (±3)
+        const newCount = Math.max(min, Math.min(max, currentCount + (Math.random() < 0.5 ? -3 : 3)));
+
+        // Actualiza el valor en la base de datos
+        await pool.query('UPDATE active_students SET count = $1 WHERE id = 1', [newCount]);
+        console.log(`Estudiantes activos actualizados: ${newCount}`);
+    } catch (error) {
+        console.error('Error al actualizar estudiantes activos:', error);
+    }
+}
+
+// Actualiza el número cada 3 minutos
+setInterval(updateActiveStudents, 36000);
+updateActiveStudents();
+
 
 // Rutas estáticas
 app.use(express.static(path.join(__dirname, '../frontend')));
