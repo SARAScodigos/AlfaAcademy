@@ -331,7 +331,7 @@ label {
     }
     iframe {
         width: 100% !important; /* Toma el ancho completo del contenedor */
-        height: 100% !important; /* Aumenta la altura del video */
+        height: 190px !important; /* Aumenta la altura del video */
         border: none !important;
         border-radius: 10px !important;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;

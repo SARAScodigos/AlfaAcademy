@@ -134,6 +134,14 @@ app.get('/index.html', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
+app.get('/curso.html', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/curso.html'));
+});
+
+app.get('/simulacros.html', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/simulacros.html'));
+});
+
 app.get('/admin.html', ensureRole('admin'), (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/admin.html'));
 });
