@@ -19,7 +19,7 @@ const correctAnswers = {
   1: { // Formulario con data-id="1"
       q1: '20', // Respuesta correcta de la pregunta 1
       q2: 'Suma de exponentes', // Respuesta correcta de la pregunta 2
-      q3: '1/2' // Respuesta correcta de la pregunta 3
+      q3: '4' // Respuesta correcta de la pregunta 3
   }
   
 };
