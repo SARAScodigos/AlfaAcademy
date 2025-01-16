@@ -7,7 +7,22 @@ body {
     justify-content: center;
     height: 100vh;
 }
+.password_show {
+    display: flex;
+    align-items: center;  /* Alinea los elementos verticalmente en el centro */
+    gap: 10px;            /* Espacio entre los elementos */
+    width: 100%;        /* Asegura que el contenedor ocupe el ancho total disponible */
+}
 
+.password_show i {
+    width: 10%;   
+    margin-bottom: 15px;        /* 20% del ancho del contenedor para el ícono *   /* Centra el ícono en el espacio asignado */
+}
+
+.password_show input {
+    width: 90%;           /* 80% del ancho del contenedor para el input */
+    /* Opcional: Agrega más estilos para el input si es necesario */
+}
 .login-container {
     background: #fff;
     padding: 2rem;
