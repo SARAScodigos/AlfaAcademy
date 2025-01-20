@@ -34,6 +34,12 @@ correctAnswers[3] = {
   q3: '1210'             // Respuesta correcta para la pregunta 3
 };
 
+correctAnswers[4] = {
+  q1: '30',              // Respuesta correcta para la pregunta 1
+  q2: '20',             // Respuesta correcta para la pregunta 2
+  q3: '16'             // Respuesta correcta para la pregunta 3
+};
+
 
 // Manejo de todos los formularios dinámicamente
 document.addEventListener('change', (event) => {
