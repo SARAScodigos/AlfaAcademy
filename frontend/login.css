@@ -160,3 +160,7 @@ button:hover {
 #students-text {
     color: #333;
 }
+
+@media (max-width: 770px) {
+    
+}
