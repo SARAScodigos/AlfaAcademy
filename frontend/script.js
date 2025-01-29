@@ -39,7 +39,35 @@ correctAnswers[4] = {
   q2: '20',             // Respuesta correcta para la pregunta 2
   q3: '16'             // Respuesta correcta para la pregunta 3
 };
+correctAnswers[5] = {
+  q1: '1/6',              // Respuesta correcta para la pregunta 1
+  q2: '17',             // Respuesta correcta para la pregunta 2
+  q3: '1/4'             // Respuesta correcta para la pregunta 3
+};
 
+correctAnswers[6] = {
+  q1: '(0,0)',              // Respuesta correcta para la pregunta 1
+  q2: '(4,3)',             // Respuesta correcta para la pregunta 2
+  q3: 'II'             // Respuesta correcta para la pregunta 3
+};
+
+correctAnswers[7] = {
+  q1: 'Una relación donde cada entrada tiene una única salida',              // Respuesta correcta para la pregunta 1
+  q2: 'y = 2x + 3',             // Respuesta correcta para la pregunta 2
+  q3: 'Cuadrática'             // Respuesta correcta para la pregunta 3
+};
+
+correctAnswers[8] = {
+  q1: 'El resultado de sumar todos los valores y dividir por el número total de datos',              // Respuesta correcta para la pregunta 1
+  q2: '7',             // Respuesta correcta para la pregunta 2
+  q3: 'Moda'             // Respuesta correcta para la pregunta 3
+};
+
+correctAnswers[9] = {
+  q1: 'Comparar diferentes categorías de datos',              // Respuesta correcta para la pregunta 1
+  q2: 'Cuando se desea mostrar proporciones o porcentajes',             // Respuesta correcta para la pregunta 2
+  q3: 'Gráfico de líneas'             // Respuesta correcta para la pregunta 3
+};
 
 // Manejo de todos los formularios dinámicamente
 document.addEventListener('change', (event) => {
